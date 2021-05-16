@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/Sidebar.css";
-import { Avatar } from "@material-ui/core";
+import { Avatar, IconButton } from "@material-ui/core";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -11,9 +11,15 @@ function Sidebar() {
       <div className="sidebar__header">
         <Avatar />
         <div className="sidebar__headerRight">
-          <DonutLargeIcon />
-          <ChatIcon />
-          <MoreVertIcon />
+          <IconButton>
+            <DonutLargeIcon />
+          </IconButton>
+          <IconButton>
+            <ChatIcon />
+          </IconButton>
+          <IconButton>
+            <MoreVertIcon />
+          </IconButton>
         </div>
       </div>
 
