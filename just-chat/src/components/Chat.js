@@ -6,6 +6,8 @@ import { MoreVert, AttachFile, SearchOutlined } from "@material-ui/icons";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
 import db from "../firebase";
+import { useStateValue } from "../StateProvider";
+import firebase from "firebase";
 
 function Chat() {
   const [seed, setSeed] = useState("");
@@ -13,6 +15,7 @@ function Chat() {
   const { roomId } = useParams();
   const [roomName, setRoomName] = useState("");
   const [messages, setMessages] = useState([]);
+  const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
     if (roomId) {
@@ -37,6 +40,13 @@ function Chat() {
   const sendMessage = (e) => {
     e.preventDefault();
     console.log(input);
+
+    db.collection("rooms").doc(roomId).collection("messages").add({
+      message: input,
+      name: user.displayName,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+
     setInput("");
   };
 
